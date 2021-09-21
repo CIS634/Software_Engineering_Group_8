@@ -4,3 +4,7 @@ Hotel Management Software PHP, JavaScript, Bootstrap, and CSS were used to creat
 
 Users can browse the homepage, services, rooms, and contact us pages in the user area. From the room page, users may reserve the room that best suits their needs. This project provides an easy way for customers to make reservations and for hotels to manage reservations.
 
+
+Technologies:- HTML, CSS, JS, PHP\
+Tools:- xampp, vs code\
+Database:- sql
