@@ -15,6 +15,9 @@ CREATE TABLE `booking` (
   `remaining_price` int(10) NOT NULL,
   `payment_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `booking`
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
 
 -- Table structure for table `complaint`
 
@@ -40,6 +43,8 @@ CREATE TABLE `customer` (
   `id_card_no` varchar(20) NOT NULL,
   `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `customer`
+  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`id_card_type_id`) REFERENCES `id_card_type` (`id_card_type_id`);
 
 -- Table structure for table `emp_history`
 
@@ -51,6 +56,9 @@ CREATE TABLE `emp_history` (
   `to_date` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `emp_history`
+  ADD CONSTRAINT `emp_history_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `staff` (`emp_id`),
+  ADD CONSTRAINT `emp_history_ibfk_2` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`);
 
 
 -- Dumping data for table `emp_history`
@@ -82,6 +90,8 @@ CREATE TABLE `room` (
   `check_out_status` tinyint(1) NOT NULL,
   `deleteStatus` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `room`
+  ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`room_type_id`) REFERENCES `room_type` (`room_type_id`);
 
 -- Dumping data for table `room`
 INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_status`, `check_out_status`, `deleteStatus`) VALUES
@@ -89,6 +99,8 @@ INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_st
 (28, 1, 'A 102', NULL, 0, 0, 0),
 (29, 2, 'B 201', NULL, 0, 0, 0),
 (30, 3, 'C 301', NULL, 0, 0, 0);
+
+
 
 -- Table structure for table `room_type`
 
@@ -119,6 +131,9 @@ CREATE TABLE `shift` (
   `shift` varchar(100) NOT NULL,
   `shift_timing` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `shift`
+  MODIFY `shift_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 
 -- Dumping data for table `shift`
 
@@ -143,6 +158,12 @@ CREATE TABLE `staff` (
   `joining_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `staff`
+  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`id_card_type`) REFERENCES `id_card_type` (`id_card_type_id`),
+  ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`),
+  ADD CONSTRAINT `staff_ibfk_3` FOREIGN KEY (`staff_type_id`) REFERENCES `staff_type` (`staff_type_id`);
+  ALTER TABLE `staff`
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 -- Dumping data for table `staff`
 
@@ -155,6 +176,8 @@ CREATE TABLE `staff_type` (
   `staff_type_id` int(10) NOT NULL,
   `staff_type` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `staff_type`
+  MODIFY `staff_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 -- Dumping data for table `staff_type`
 INSERT INTO `staff_type` (`staff_type_id`, `staff_type`) VALUES
@@ -177,6 +200,8 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 
 -- Dumping data for table `user`
