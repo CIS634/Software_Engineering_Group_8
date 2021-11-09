@@ -233,3 +233,41 @@ ALTER TABLE `user`
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created_at`) VALUES
 (2, 'Rikul Joshi', 'rikul', 'rikuljoshi@gmail.com', '1234', '2020-10-27 11:49:22'),
 (3, 'Pavan Sanghani', 'pavan', 'pavan@gmail.com', '1234', '2020-10-28 12:49:22');
+
+
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`booking_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `room_id` (`room_id`);
+
+ALTER TABLE `complaint`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD KEY `customer_id_type` (`id_card_type_id`);
+
+ALTER TABLE `emp_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `emp_id` (`emp_id`),
+  ADD KEY `shift_id` (`shift_id`);
+
+ALTER TABLE `id_card_type`
+  ADD PRIMARY KEY (`id_card_type_id`);
+
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`room_id`),
+  ADD KEY `room_type_id` (`room_type_id`);
+
+ALTER TABLE `room_type`
+  ADD PRIMARY KEY (`room_type_id`);
+
+ALTER TABLE `shift`
+  ADD PRIMARY KEY (`shift_id`);
+
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`emp_id`),
+  ADD KEY `id_card_type` (`id_card_type`),
+  ADD KEY `shift_id` (`shift_id`),
+  ADD KEY `staff_type_id` (`staff_type_id`);
+
