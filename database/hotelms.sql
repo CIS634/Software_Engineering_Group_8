@@ -18,8 +18,6 @@ CREATE TABLE `booking` (
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
-ALTER TABLE `booking`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 
 -- Table structure for table `complaint`
@@ -34,8 +32,7 @@ CREATE TABLE `complaint` (
   `resolve_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `budget` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `complaint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 
 
 -- Table structure for table `customer`
@@ -51,8 +48,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ALTER TABLE `customer`
   ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`id_card_type_id`) REFERENCES `id_card_type` (`id_card_type_id`);
-  ALTER TABLE `customer`
-  MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ 
 
 -- Table structure for table `emp_history`
 
@@ -67,8 +63,7 @@ CREATE TABLE `emp_history` (
 ALTER TABLE `emp_history`
   ADD CONSTRAINT `emp_history_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `staff` (`emp_id`),
   ADD CONSTRAINT `emp_history_ibfk_2` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`);
-  ALTER TABLE `emp_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  
 
 
 -- Dumping data for table `emp_history`
@@ -81,8 +76,7 @@ CREATE TABLE `id_card_type` (
   `id_card_type_id` int(10) NOT NULL,
   `id_card_type` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `id_card_type`
-  MODIFY `id_card_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 
 -- Dumping data for table `id_card_type`
 INSERT INTO `id_card_type` (`id_card_type_id`, `id_card_type`) VALUES
@@ -104,8 +98,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ALTER TABLE `room`
   ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`room_type_id`) REFERENCES `room_type` (`room_type_id`);
-  ALTER TABLE `room`
-  MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+ 
 
 -- Dumping data for table `room`
 INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_status`, `check_out_status`, `deleteStatus`) VALUES
@@ -124,8 +117,7 @@ CREATE TABLE `room_type` (
   `price` int(10) NOT NULL,
   `max_person` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `room_type`
-  MODIFY `room_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 
 -- Dumping data for table `room_type`
 INSERT INTO `room_type` (`room_type_id`, `room_type`, `price`, `max_person`) VALUES
@@ -196,8 +188,7 @@ CREATE TABLE `staff_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ALTER TABLE `staff_type`
   MODIFY `staff_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-ALTER TABLE `staff_type`
-  ADD PRIMARY KEY (`staff_type_id`);
+
 
 
 -- Dumping data for table `staff_type`
@@ -223,8 +214,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+
   
 
 
@@ -270,4 +260,30 @@ ALTER TABLE `staff`
   ADD KEY `id_card_type` (`id_card_type`),
   ADD KEY `shift_id` (`shift_id`),
   ADD KEY `staff_type_id` (`staff_type_id`);
+  ALTER TABLE `staff_type`
+  ADD PRIMARY KEY (`staff_type_id`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `booking`
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+ALTER TABLE `complaint`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE `customer`
+  MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+ALTER TABLE `emp_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+ALTER TABLE `id_card_type`
+  MODIFY `id_card_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+ALTER TABLE `room`
+  MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+ALTER TABLE `room_type`
+  MODIFY `room_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
