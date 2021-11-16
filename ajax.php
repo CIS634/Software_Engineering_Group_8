@@ -22,7 +22,7 @@ if (isset($_POST['login'])) {
         }
     }
 }
-
+ 
 if (isset($_POST['add_room'])) {
     $room_type_id = $_POST['room_type_id'];
     $room_no = $_POST['room_no'];
@@ -108,6 +108,34 @@ if (isset($_GET['delete_room'])) {
     }
 }
 
+if (isset($_POST['room_type'])) {
+    $room_type_id = $_POST['room_type_id'];
+
+    $sql = "SELECT * FROM room WHERE room_type_id = '$room_type_id' AND status IS NULL AND deleteStatus = '0'";
+    $result = mysqli_query($connection, $sql);
+    if ($result) {
+        echo "<option selected disabled>Select Room Type</option>";
+        while ($room = mysqli_fetch_assoc($result)) {
+            echo "<option value='" . $room['room_id'] . "'>" . $room['room_no'] . "</option>";
+        }
+    } else {
+        echo "<option>No Available</option>";
+    }
+}
+
+if (isset($_POST['room_price'])) {
+    $room_id = $_POST['room_id'];
+
+    $sql = "SELECT * FROM room NATURAL JOIN room_type WHERE room_id = '$room_id'";
+    $result = mysqli_query($connection, $sql);
+    if ($result) {
+        $room = mysqli_fetch_assoc($result);
+        echo $room['price'];
+    } else {
+        echo "0";
+    }
+}
+
 if (isset($_POST['booking'])) {
     $room_id = $_POST['room_id'];
     $check_in = $_POST['check_in'];
@@ -176,34 +204,6 @@ if (isset($_POST['cutomerDetails'])) {
         }
 
         echo json_encode($response);
-    }
-}
-
-if (isset($_POST['room_type'])) {
-    $room_type_id = $_POST['room_type_id'];
-
-    $sql = "SELECT * FROM room WHERE room_type_id = '$room_type_id' AND status IS NULL AND deleteStatus = '0'";
-    $result = mysqli_query($connection, $sql);
-    if ($result) {
-        echo "<option selected disabled>Select Room Type</option>";
-        while ($room = mysqli_fetch_assoc($result)) {
-            echo "<option value='" . $room['room_id'] . "'>" . $room['room_no'] . "</option>";
-        }
-    } else {
-        echo "<option>No Available</option>";
-    }
-}
-
-if (isset($_POST['room_price'])) {
-    $room_id = $_POST['room_id'];
-
-    $sql = "SELECT * FROM room NATURAL JOIN room_type WHERE room_id = '$room_id'";
-    $result = mysqli_query($connection, $sql);
-    if ($result) {
-        $room = mysqli_fetch_assoc($result);
-        echo $room['price'];
-    } else {
-        echo "0";
     }
 }
 
