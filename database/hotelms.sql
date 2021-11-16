@@ -15,9 +15,6 @@ CREATE TABLE `booking` (
   `remaining_price` int(10) NOT NULL,
   `payment_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
 
 
 -- Table structure for table `complaint`
@@ -46,8 +43,7 @@ CREATE TABLE `customer` (
   `id_card_no` varchar(20) NOT NULL,
   `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`id_card_type_id`) REFERENCES `id_card_type` (`id_card_type_id`);
+
  
 
 -- Table structure for table `emp_history`
@@ -60,9 +56,7 @@ CREATE TABLE `emp_history` (
   `to_date` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `emp_history`
-  ADD CONSTRAINT `emp_history_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `staff` (`emp_id`),
-  ADD CONSTRAINT `emp_history_ibfk_2` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`);
+
   
 
 
@@ -96,9 +90,7 @@ CREATE TABLE `room` (
   `check_out_status` tinyint(1) NOT NULL,
   `deleteStatus` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `room`
-  ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`room_type_id`) REFERENCES `room_type` (`room_type_id`);
- 
+
 
 -- Dumping data for table `room`
 INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_status`, `check_out_status`, `deleteStatus`) VALUES
@@ -139,9 +131,7 @@ CREATE TABLE `shift` (
   `shift` varchar(100) NOT NULL,
   `shift_timing` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `shift`
-  MODIFY `shift_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-  
+
 
 
 -- Dumping data for table `shift`
@@ -168,12 +158,6 @@ CREATE TABLE `staff` (
   `joining_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `staff`
-  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`id_card_type`) REFERENCES `id_card_type` (`id_card_type_id`),
-  ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`),
-  ADD CONSTRAINT `staff_ibfk_3` FOREIGN KEY (`staff_type_id`) REFERENCES `staff_type` (`staff_type_id`);
-  ALTER TABLE `staff`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 -- Dumping data for table `staff`
 
@@ -186,8 +170,6 @@ CREATE TABLE `staff_type` (
   `staff_type_id` int(10) NOT NULL,
   `staff_type` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `staff_type`
-  MODIFY `staff_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 
 
@@ -212,10 +194,7 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
-  
 
 
 -- Dumping data for table `user`
@@ -223,7 +202,6 @@ ALTER TABLE `user`
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created_at`) VALUES
 (2, 'Rikul Joshi', 'rikul', 'rikuljoshi@gmail.com', '1234', '2020-10-27 11:49:22'),
 (3, 'Pavan Sanghani', 'pavan', 'pavan@gmail.com', '1234', '2020-10-28 12:49:22');
-
 
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
@@ -260,30 +238,4 @@ ALTER TABLE `staff`
   ADD KEY `id_card_type` (`id_card_type`),
   ADD KEY `shift_id` (`shift_id`),
   ADD KEY `staff_type_id` (`staff_type_id`);
-  ALTER TABLE `staff_type`
-  ADD PRIMARY KEY (`staff_type_id`);
-
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `booking`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
-ALTER TABLE `complaint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
-ALTER TABLE `customer`
-  MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
-ALTER TABLE `emp_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
-ALTER TABLE `id_card_type`
-  MODIFY `id_card_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
-ALTER TABLE `room`
-  MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
-ALTER TABLE `room_type`
-  MODIFY `room_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
